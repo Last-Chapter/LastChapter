@@ -45,7 +45,6 @@ THIRD_PARTY_APPS = [
 MY_APPS = [
     "books",
     "borrowing",
-    "copies",
     "following",
     "users",
     "copies",
