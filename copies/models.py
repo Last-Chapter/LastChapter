@@ -16,7 +16,7 @@ class Copy(models.Model):
 
 class Borrowing(models.Model):    
     copy = models.ForeignKey(
-        "Copy",
+        "copies.Copy",
         on_delete=models.CASCADE,
         related_name="borrowed_copy",
     )
