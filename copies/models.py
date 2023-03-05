@@ -1,8 +1,9 @@
 from django.db import models
+import uuid
 
 class Copy(models.Model):
     class Meta:
-        ordering = ["id"]
+        ordering = ["book.title"]
 
     created_at = models.DateField(auto_now_add=True)
     is_available = models.BooleanField(default=True)
@@ -12,6 +13,9 @@ class Copy(models.Model):
         on_delete = models.CASCADE,
         related_name = "copies", 
     )
+
+    def __repr__(self) -> str:
+        return f'<{self.id} - {self.is_available}>'
 
 
 class Borrowing(models.Model):    
@@ -29,3 +33,4 @@ class Borrowing(models.Model):
 
     borrowed_at = models.DateField(auto_now_add=True)
     returned_at = models.DateField(null=True, default=None)
+

@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 class Genres(models.TextChoices):
     ADVENTURE =  "Aventura",
@@ -27,17 +28,23 @@ class Genres(models.TextChoices):
 
 class Book(models.Model):
     class Meta:
-        ordering = ["id"]
+        ordering = ["title"]
     
+    id = uuid.uuid4()
     title = models.CharField(max_length=127)
     author = models.CharField(max_length=50)
-    description = models.TextField(null=True, default=True)
+    description = models.TextField(null=True)
     genre = models.CharField(
         max_length=50,
         choices = Genres.choices,
         default = Genres.DEFAULT,
     )
     launch_year = models.IntegerField()
+    
+
+    def __repr__(self) -> str:
+        return f'<{self.id} - {self.title}>'
+    
 
 class Following(models.Model):
     book = models.ForeignKey(
