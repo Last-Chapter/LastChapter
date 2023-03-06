@@ -14,9 +14,17 @@ class Copy(models.Model):
         on_delete = models.CASCADE,
         related_name = "copies", 
     )
+    
+    user_borrowers = models.ManyToManyField(
+        "users.User", 
+        through="Borrowing", 
+        related_name="copy_borrowers"
+    )
 
+    
     def __repr__(self) -> str:
         return f'<{self.id} - {self.is_available}>'
+
 
 
 class Borrowing(models.Model):    

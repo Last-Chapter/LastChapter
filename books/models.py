@@ -40,11 +40,18 @@ class Book(models.Model):
         default = Genres.DEFAULT,
     )
     launch_year = models.IntegerField()
+
+    user_followers = models.ManyToManyField(
+        "users.User",
+        through="Following", 
+        related_name="book_followers"
+    )
     
 
     def __repr__(self) -> str:
         return f'<{self.id} - {self.title}>'
-    
+
+
 
 class Following(models.Model):
     book = models.ForeignKey(
