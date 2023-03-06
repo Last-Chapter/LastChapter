@@ -2,8 +2,8 @@ from django.db import models
 import uuid
 
 class Copy(models.Model):
-    class Meta:
-        ordering = ["book.title"]
+    # class Meta:
+    #     ordering = ["book.title"]
 
     id = uuid.uuid4()
     created_at = models.DateField(auto_now_add=True)

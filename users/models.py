@@ -19,10 +19,8 @@ class User(AbstractUser):
         null=True
     )
 
-    USERNAME_FIELD = "email"
+    # USERNAME_FIELD = "email"
 
     def __repr__(self) -> str:
         return f'<{self.id} - {self.email}>'
     
-
-
