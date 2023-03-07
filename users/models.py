@@ -17,7 +17,6 @@ class User(AbstractUser):
         "addresses.Address",
         on_delete=models.PROTECT,
         related_name="user",
-        null=True,
     )
 
     def __repr__(self) -> str:
