@@ -13,7 +13,7 @@ class AddressView(ListCreateAPIView):
     serializer_class = AddressSerializer
 
 
-class AdressDetailView(RetrieveUpdateDestroyAPIView):
+class AddressDetailView(RetrieveUpdateDestroyAPIView):
     # authentication_classes = [JWTAuthentication]
     # permission_classes = [IsAccountOwnerOrAdmin]
 
