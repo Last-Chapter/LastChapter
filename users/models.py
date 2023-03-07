@@ -6,20 +6,19 @@ import uuid
 class User(AbstractUser):
     class Meta:
         ordering = ["first_name"]
-    
+
     id = uuid.uuid4()
     is_blocked = models.BooleanField(null=True, default=False)
 
     email = models.EmailField(max_length=127, unique=True)
     first_name = models.CharField(max_length=127)
 
-    address = models.OneToOneField(
+    address = models.ForeignKey(
         "addresses.Address",
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         related_name="user",
-        null=True
+        null=True,
     )
 
     def __repr__(self) -> str:
-        return f'<{self.id} - {self.email}>'
-    
+        return f"<{self.id} - {self.email}>"
