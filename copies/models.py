@@ -40,5 +40,5 @@ class Borrowing(models.Model):
     )
 
     borrowed_at = models.DateField(auto_now_add=True)
-    should_return_at = models.DateField(null=True, default=None)
     returned_at = models.DateField(null=True, default=None)
+    should_return_at = models.DateField(null=True, default=None)
