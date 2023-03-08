@@ -31,7 +31,6 @@ class CopyListView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
 
 
-
 class CopyDetailView(generics.ListCreateAPIView):
     queryset = Copy.objects.all()
     serializer_class = CopySerializer
