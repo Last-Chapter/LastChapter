@@ -11,12 +11,10 @@ class AddressSerializer(ModelSerializer):
             "number",
             "district",
             "city",
-            "id_user",
+            "user",
         ]
-        extra_kwargs = {
-            "id": {"read_only": True},
-            "id_user": {"read_only": True},
-        }
+        extra_kwargs = {"id": {"read_only": True}, "user": {"read_only": True}}
+
 
     def create(self, validated_data: dict) -> Address:
         return Address.objects.create(**validated_data)

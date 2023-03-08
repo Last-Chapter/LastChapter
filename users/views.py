@@ -2,7 +2,7 @@ from .models import User
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .serializers import UserSerializer
-from .permissions import IsAccountOwnerOrAdmin
+from permissions.isAccountOwnerOrAdmin import IsAccountOwnerOrAdmin
 
 
 class UserView(ListCreateAPIView):
