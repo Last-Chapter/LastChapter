@@ -35,7 +35,10 @@ class UserSerializer(serializers.ModelSerializer):
             "is_blocked",
             "address_id",
         ]
-        extra_kwargs = {"password": {"write_only": True}, "id": {"read_only": True}}
+        extra_kwargs = {
+            "password": {"write_only": True},
+            "id": {"read_only": True},
+        }
 
     def create(self, validated_data: dict) -> User:
         return User.objects.create_user(**validated_data)
