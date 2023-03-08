@@ -44,7 +44,9 @@ class Book(models.Model):
     launch_year = models.IntegerField()
 
     user_followers = models.ManyToManyField(
-        "users.User", through="Following", related_name="book_followers"
+        "users.User",
+        through="Following",
+        related_name="book_followers",
     )
 
     def __repr__(self) -> str:
@@ -53,9 +55,13 @@ class Book(models.Model):
 
 class Following(models.Model):
     book = models.ForeignKey(
-        "books.Book", on_delete=models.CASCADE, related_name="book_followed"
+        "books.Book",
+        on_delete=models.CASCADE,
+        related_name="book_followed",
     )
 
     user = models.ForeignKey(
-        "users.User", on_delete=models.CASCADE, related_name="followed_by"
+        "users.User",
+        on_delete=models.CASCADE,
+        related_name="followed_by",
     )
