@@ -1,8 +1,16 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from .models import Address
+from users.models import User
+from users.serializers import UserSerializer
 
 
-class AddressSerializer(ModelSerializer):
+class AddressSerializer(serializers.ModelSerializer):
+    users = serializers.SerializerMethodField()
+    # users = UserSerializer(
+    #     many=True,
+    #     read_only=True,
+    # )
+
     class Meta:
         model = Address
         fields = [
@@ -15,16 +23,14 @@ class AddressSerializer(ModelSerializer):
         ]
         extra_kwargs = {
             "id": {"read_only": True},
-            "users": {"read_only": True},
         }
 
     def create(self, validated_data: dict) -> Address:
-        return Address.objects.create(**validated_data)
+        user = User.objects.get(id=self.context["request"].user.id)
+        create_address = Address.objects.create(**validated_data)
+        user.address = create_address
+        user.save()
+        return create_address
 
-    def update(self, instance: Address, validated_data: dict) -> Address:
-        for key, value in validated_data.items():
-            setattr(instance, key, value)
-
-        instance.save()
-
-        return instance
+    def get_users(self, obj):
+        return [user.id for user in obj.users.all()]

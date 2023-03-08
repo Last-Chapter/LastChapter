@@ -14,8 +14,8 @@ class BookView(generics.ListCreateAPIView):
 
 
 class BookDetailView(generics.RetrieveAPIView):
-    # authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAccountOwnerOrAdmin]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
