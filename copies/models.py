@@ -40,4 +40,6 @@ class Borrowing(models.Model):
     )
 
     borrowed_at = models.DateField(auto_now_add=True)
-    returned_at = models.DateField(null=True, default=None)
+    should_returned_at = models.DateField(null=True, default=None)
+    # returned at -> automatico
+    # seja o dia que foi pego + 15 dias

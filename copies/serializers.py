@@ -4,12 +4,12 @@ from users.serializers import UserSerializer
 from rest_framework.views import APIView, Request, Response, status
 
 
-class CopySerializer(serializers.Serializer):
+class CopySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Copy
-        fields = ["id", "created_at", "is_available",]
-        read_only_fields = ["id", "created_at"]
+        fields = ["id", "created_at", "is_available", "book"]
+        read_only_fields = ["id", "created_at", "book"]
 
     def create(self, validated_data: dict) -> Copy:
         return Copy.objects.create(**validated_data)
