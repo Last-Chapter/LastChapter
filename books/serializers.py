@@ -15,5 +15,4 @@ class BookSerializer(serializers.ModelSerializer):
             "launch_year",
             "user_followers",
         ]
-        # depth = 1
         read_only_fields = ["id", "user_followers"]
