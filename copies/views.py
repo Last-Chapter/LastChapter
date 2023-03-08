@@ -5,10 +5,10 @@ from .serializers import CopySerializer
 from .permissions import IsAccountOwnerOrAdmin
 from rest_framework.views import APIView, Response, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
-#   from books.models import Book
+from books.models import Book
 
 
-class CopyView(generics.ListCreateAPIView):
+class CopyView(generics.CreateAPIView):
 
     queryset = Copy.objects.all()
     serializer_class = CopySerializer
@@ -16,6 +16,22 @@ class CopyView(generics.ListCreateAPIView):
 
     permission_classes = [IsAccountOwnerOrAdmin]
     authentication_classes = [JWTAuthentication]
+
+    def perform_create(self, serializer):
+        book_id = self.kwargs["book_id"]
+        book = Book.objects.get(id=book_id)
+
+        serializer.save(book=book)
+
+
+class CopyListView(generics.ListAPIView):
+    
+    queryset = Copy.objects.all()
+    serializer_class = CopySerializer
+
+    permission_classes = [IsAccountOwnerOrAdmin]
+    authentication_classes = [JWTAuthentication]
+
 
 
 class CopyDetailView(generics.ListCreateAPIView):
@@ -26,5 +42,5 @@ class CopyDetailView(generics.ListCreateAPIView):
     permission_classes = [IsAccountOwnerOrAdmin]
     authentication_classes = [JWTAuthentication]
 
-    def perform_create(self, serializer):
-        serializer.save(book=self.kwargs.get("book_id"))
+#    def perform_create(self, serializer):
+#        serializer.save(book=self.kwargs.get("book_id"))

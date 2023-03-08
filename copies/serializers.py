@@ -10,6 +10,3 @@ class CopySerializer(serializers.ModelSerializer):
         model = Copy
         fields = ["id", "created_at", "is_available", "book"]
         read_only_fields = ["id", "created_at", "book"]
-
-    def create(self, validated_data: dict) -> Copy:
-        return Copy.objects.create(**validated_data)
