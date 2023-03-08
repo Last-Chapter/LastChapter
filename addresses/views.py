@@ -8,8 +8,12 @@ from permissions.isAccountOwnerOrAdmin import IsAccountOwnerOrAdmin
 class AddressView(ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAccountOwnerOrAdmin]
+
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(users=self.request.user)
 
 
 class AddressDetailView(RetrieveUpdateDestroyAPIView):

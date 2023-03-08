@@ -3,8 +3,11 @@ import uuid
 
 
 class Copy(models.Model):
-
-    id = uuid.uuid4()
+    id = models.UUIDField(
+        default=uuid.uuid4,
+        primary_key=True,
+        editable=False,
+    )
     created_at = models.DateField(auto_now_add=True)
     is_available = models.BooleanField(default=True)
 
@@ -13,18 +16,16 @@ class Copy(models.Model):
         on_delete=models.CASCADE,
         related_name="copies",
     )
-    
+
     user_borrowers = models.ManyToManyField(
-        "users.User", 
-        through="Borrowing", 
-        related_name="copy_borrowers"
+        "users.User", through="Borrowing", related_name="copy_borrowers"
     )
 
     def __repr__(self) -> str:
-        return f'<{self.id} - {self.is_available}>'
+        return f"<{self.id} - {self.is_available}>"
 
 
-class Borrowing(models.Model):    
+class Borrowing(models.Model):
     copy = models.ForeignKey(
         "copies.Copy",
         on_delete=models.CASCADE,
@@ -39,4 +40,3 @@ class Borrowing(models.Model):
 
     borrowed_at = models.DateField(auto_now_add=True)
     returned_at = models.DateField(null=True, default=None)
-
