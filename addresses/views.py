@@ -12,9 +12,6 @@ class AddressView(ListCreateAPIView):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(users=self.request.user)
-
 
 class AddressDetailView(RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
