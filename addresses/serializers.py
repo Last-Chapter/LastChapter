@@ -1,5 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-from rest_framework.validators import UniqueValidator
 from .models import Address
 
 
@@ -12,9 +11,12 @@ class AddressSerializer(ModelSerializer):
             "number",
             "district",
             "city",
-            "users",
+            "id_user",
         ]
-        extra_kwargs = {"id": {"read_only": True}}
+        extra_kwargs = {
+            "id": {"read_only": True},
+            "id_user": {"read_only": True},
+        }
 
     def create(self, validated_data: dict) -> Address:
         return Address.objects.create(**validated_data)

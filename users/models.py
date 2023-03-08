@@ -20,7 +20,7 @@ class User(AbstractUser):
     address = models.ForeignKey(
         "addresses.Address",
         on_delete=models.PROTECT,
-        related_name="user",
+        related_name="users",
         null=True,
     )
 
