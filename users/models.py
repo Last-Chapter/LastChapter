@@ -10,12 +10,12 @@ class User(AbstractUser):
         editable=False,
     )
     is_blocked = models.BooleanField(null=True, default=False)
-
     email = models.EmailField(max_length=127, unique=True)
     first_name = models.CharField(max_length=127)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+    username = None
 
     address = models.ForeignKey(
         "addresses.Address",
