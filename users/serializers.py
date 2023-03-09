@@ -20,6 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "password",
             "is_superuser",
+            "is_staff",
             "first_name",
             "last_name",
             "is_active",
@@ -29,10 +30,12 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "password": {"write_only": True},
             "id": {"read_only": True},
+            "is_staff": {"read_only": True},
         }
 
     def create(self, validated_data: dict) -> User:
         create_user = User.objects.create(**validated_data)
+        create_user.is_staff = create_user.is_superuser
         create_user.password = make_password(create_user.password)
         create_user.save()
 
