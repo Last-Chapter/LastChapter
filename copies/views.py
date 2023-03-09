@@ -6,14 +6,15 @@ from .serializers import CopySerializer
 from .permissions import IsAccountOwnerOrAdmin
 from rest_framework.views import APIView, Response, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticatedOrReadOnly # , IsAdminUser
 
 
-class CopyView(generics.CreateAPIView):
+class CopyView(generics.ListCreateAPIView):
     queryset = Copy.objects.all()
     serializer_class = CopySerializer
     lookup_url_kwarg = "book_id"
 
-    permission_classes = [IsAccountOwnerOrAdmin]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     authentication_classes = [JWTAuthentication]
 
     def perform_create(self, serializer):
@@ -27,13 +28,25 @@ class CopyListView(generics.ListAPIView):
     queryset = Copy.objects.all()
     serializer_class = CopySerializer
 
-    permission_classes = [IsAccountOwnerOrAdmin]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     authentication_classes = [JWTAuthentication]
 
 
-class CopyDetailView(generics.ListCreateAPIView):
+class CopyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Copy.objects.all()
     serializer_class = CopySerializer
-
-    permission_classes = [IsAccountOwnerOrAdmin]
+    
+    permission_classes = [IsAuthenticatedOrReadOnly]
     authentication_classes = [JWTAuthentication]
+
+    serializer_class = CopySerializer
+
+    lookup_url_kwarg = "copy_id"
+
+    def perform_create(self, serializer):
+            copy_id = self.kwargs["copy_id"]
+            copy = Copy.objects.get(id=copy_id)
+            serializer.save(copy=copy)
+
+    def perform_destroy(self, instance: Copy):
+            instance.delete()
