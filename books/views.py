@@ -1,8 +1,10 @@
 from rest_framework import generics
+from rest_framework.views import APIView, Response, Request, status
 from .models import Book, Following
 from .serializers import BookSerializer, BookFollowingSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from permissions.isAccountOwnerOrAdmin import IsAccountOwnerOrAdmin
+from django.shortcuts import get_object_or_404
 
 
 class BookView(generics.ListCreateAPIView):
@@ -21,10 +23,16 @@ class BookDetailView(generics.RetrieveAPIView):
 
     lookup_url_kwarg = "book_id"
 
-class BookFollowingView(generics.ListCreateAPIView):
+
+class BookFollowingView(APIView):
     authentication_classes = [JWTAuthentication]
 
-    queryset = Following.objects.all()
-    serializer_class = BookFollowingSerializer
+    def post(self, request, book_id):
+        book = get_object_or_404(Book, id=book_id)
 
-    lookup_url_kwarg = "book_id"
+        user = request.user
+        serializer = BookFollowingSerializer(data=dict())
+        serializer.is_valid()
+        serializer.save(book=book, user=user)
+
+        return Response(serializer.data, status.HTTP_201_CREATED)

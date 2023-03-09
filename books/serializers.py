@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Book, Following
 from users.serializers import UserSerializer
 
+
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
@@ -16,6 +17,7 @@ class BookSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["id", "user_followers"]
 
+
 class BookFollowingSerializer(serializers.ModelSerializer):
     title = serializers.CharField(source="book.title", read_only=True)
     followed_by = serializers.CharField(source="user.email", read_only=True)
@@ -25,5 +27,5 @@ class BookFollowingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Following
-        fields = ["id","book", "user", "title", "followed_by"]
+        fields = ["id", "book", "user", "title", "followed_by"]
         read_only_fields = ["id", "book", "user", "title", "followed_by"]
