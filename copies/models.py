@@ -3,6 +3,7 @@ import uuid
 
 
 class Copy(models.Model):
+
     id = models.UUIDField(
         default=uuid.uuid4,
         primary_key=True,
@@ -40,3 +41,4 @@ class Borrowing(models.Model):
 
     borrowed_at = models.DateField(auto_now_add=True)
     returned_at = models.DateField(null=True, default=None)
+    should_return_at = models.DateField(null=True, default=None)
