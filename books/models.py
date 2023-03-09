@@ -54,6 +54,11 @@ class Book(models.Model):
 
 
 class Following(models.Model):
+    id = models.UUIDField(
+        default=uuid.uuid4,
+        primary_key=True,
+        editable=False,
+    )
     book = models.ForeignKey(
         "books.Book",
         on_delete=models.CASCADE,

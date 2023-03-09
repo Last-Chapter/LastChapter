@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Book
-from .serializers import BookSerializer
+from .models import Book, Following
+from .serializers import BookSerializer, BookFollowingSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from permissions.isAccountOwnerOrAdmin import IsAccountOwnerOrAdmin
 
@@ -18,5 +18,13 @@ class BookDetailView(generics.RetrieveAPIView):
     permission_classes = [IsAccountOwnerOrAdmin]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+    lookup_url_kwarg = "book_id"
+
+class BookFollowingView(generics.ListCreateAPIView):
+    authentication_classes = [JWTAuthentication]
+
+    queryset = Following.objects.all()
+    serializer_class = BookFollowingSerializer
 
     lookup_url_kwarg = "book_id"
