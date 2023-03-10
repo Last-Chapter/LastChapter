@@ -75,10 +75,21 @@ class CopyBorrowingView(APIView):
 
         return Response(serializer.data, status.HTTP_201_CREATED)
 
-    def patch(self, req, copy_id):
+    def patch(self, request, copy_id):
         borrowing = get_object_or_404(Borrowing, copy=copy_id)
+
         today = date.today()
+
         borrowing.returned_at = today
+
+        copy = Copy.objects.get(id=copy_id)
+
+        copy.is_available = True
+
+        copy.save()
+
         borrowing.save()
+
         serializer = CopyBorrowingSerializer(borrowing)
+
         return Response(serializer.data)
