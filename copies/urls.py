@@ -4,7 +4,6 @@ from .views import (
     CopyDetailView,
     CopyListView,
     CopyBorrowingView,
-    ReturnBorrowingView,
 )
 
 urlpatterns = [
@@ -12,5 +11,4 @@ urlpatterns = [
     path("copies/", CopyListView.as_view()),
     path("copy/<uuid:copy_id>/", CopyDetailView.as_view()),
     path("copy/borrowing/<uuid:copy_id>/", CopyBorrowingView.as_view()),
-    path("copy/borrowing/return/<uuid:copy_id>/", ReturnBorrowingView.as_view()),
 ]
