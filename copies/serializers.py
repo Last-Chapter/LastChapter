@@ -3,7 +3,6 @@ from rest_framework import serializers
 from rest_framework.views import APIView, Request, Response, status
 from copies.models import Borrowing
 from datetime import date, timedelta
-from rest_framework.exceptions import NotAcceptable
 
 
 class CopySerializer(serializers.ModelSerializer):
