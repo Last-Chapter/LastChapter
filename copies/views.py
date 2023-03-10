@@ -63,3 +63,15 @@ class CopyBorrowingView(APIView):
         serializer.save(copy=copy, user=user)
 
         return Response(serializer.data, status.HTTP_201_CREATED)
+
+
+class ReturnBorrowingView(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    def patch(self, req, copy_id):
+        get_object_or_404(Copy, id=copy_id)
+        user = req.user
+        serializer = CopyBorrowingSerializer(user, req.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(returned_at=req.data)
+        return Response(serializer.data)
