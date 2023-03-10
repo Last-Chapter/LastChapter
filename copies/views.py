@@ -1,12 +1,12 @@
 from .models import Copy
 from books.models import Book
-from django.shortcuts import render
 from rest_framework import generics
 from .serializers import CopySerializer, CopyBorrowingSerializer
 from rest_framework.views import APIView, Response, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from django.shortcuts import get_object_or_404
+
 
 class CopyView(generics.ListCreateAPIView):
     queryset = Copy.objects.all()

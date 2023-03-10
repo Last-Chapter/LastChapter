@@ -1,15 +1,10 @@
 from rest_framework import serializers
 from .models import Address
 from users.models import User
-from users.serializers import UserSerializer
 
 
 class AddressSerializer(serializers.ModelSerializer):
     users = serializers.SerializerMethodField()
-    # users = UserSerializer(
-    #     many=True,
-    #     read_only=True,
-    # )
 
     class Meta:
         model = Address
