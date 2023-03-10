@@ -1,4 +1,4 @@
-from .models import Copy
+from .models import Copy, Borrowing
 from books.models import Book
 from rest_framework import generics
 from .serializers import CopySerializer, CopyBorrowingSerializer
@@ -6,6 +6,7 @@ from rest_framework.views import APIView, Response, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from django.shortcuts import get_object_or_404
+from datetime import date
 
 
 class CopyView(generics.ListCreateAPIView):
@@ -56,22 +57,17 @@ class CopyBorrowingView(APIView):
 
     def post(self, request, copy_id):
         copy = get_object_or_404(Copy, id=copy_id)
-
         user = request.user
         serializer = CopyBorrowingSerializer(data=dict())
-        serializer.is_valid()
+        serializer.is_valid(raise_exception=True)
         serializer.save(copy=copy, user=user)
 
         return Response(serializer.data, status.HTTP_201_CREATED)
 
-
-class ReturnBorrowingView(APIView):
-    authentication_classes = [JWTAuthentication]
-
     def patch(self, req, copy_id):
-        get_object_or_404(Copy, id=copy_id)
-        user = req.user
-        serializer = CopyBorrowingSerializer(user, req.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(returned_at=req.data)
+        borrowing = get_object_or_404(Borrowing, copy=copy_id)
+        today = date.today()
+        borrowing.returned_at = today
+        borrowing.save()
+        serializer = CopyBorrowingSerializer(borrowing)
         return Response(serializer.data)
