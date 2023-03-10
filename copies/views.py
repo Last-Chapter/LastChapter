@@ -5,7 +5,6 @@ from rest_framework import generics
 from .serializers import CopySerializer
 from rest_framework.views import APIView, Response, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
-# from permissions.isStaffAndAdmin import IsStaffAndAdmin
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 
