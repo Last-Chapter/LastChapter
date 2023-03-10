@@ -3,6 +3,7 @@ from rest_framework import serializers
 from rest_framework.views import APIView, Request, Response, status
 from copies.models import Borrowing
 from datetime import date, timedelta
+from rest_framework.exceptions import NotAcceptable
 
 
 class CopySerializer(serializers.ModelSerializer):
@@ -37,3 +38,14 @@ class CopyBorrowingSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         borrowing = Borrowing.objects.create(**validated_data)
         return borrowing
+
+    def update(self, instance: Borrowing, validated_data: dict):
+        for key, value in validated_data.items():
+            if key.returned_at:
+                setattr(instance, key, value)
+            else:
+                raise NotAcceptable("Not acceptable")
+
+        instance.save()
+
+        return instance
