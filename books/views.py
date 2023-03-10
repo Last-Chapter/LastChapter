@@ -6,6 +6,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from permissions.isAccountOwnerOrAdmin import IsAccountOwnerOrAdmin
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.exceptions import NotAcceptable
 
 
 class BookView(generics.ListCreateAPIView):
@@ -14,6 +15,19 @@ class BookView(generics.ListCreateAPIView):
 
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+    def perform_create(self, serializer):
+        data_book = self.request.data
+        title = data_book["title"]
+        author = data_book["author"]
+        book = Book.objects.filter(
+            title=title,
+            author=author,
+        ).first()
+        if book:
+            raise NotAcceptable("Esse livro ja esta cadastrado")
+
+        serializer.save()
 
 
 class BookDetailView(generics.RetrieveAPIView):
