@@ -56,13 +56,13 @@ class CopyDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class CopyBorrowingView(APIView):
     authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsBlockedOrNot]
 
     def post(self, request, copy_id):
         copy = get_object_or_404(Copy, id=copy_id)
         user = request.user
 
-        # self.check_object_permissions(request, copy)
+        if user.is_blocked:
+            raise NotAcceptable("Account has been blocked")
 
         if not copy.is_available:
             raise NotAcceptable("The copy is not available")
@@ -77,7 +77,7 @@ class CopyBorrowingView(APIView):
         serializer.save(copy=copy, user=user)
 
         return Response(serializer.data, status.HTTP_201_CREATED)
-
+    
     def patch(self, request, copy_id):
         borrowing = get_object_or_404(Borrowing, copy=copy_id)
 
