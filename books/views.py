@@ -25,7 +25,7 @@ class BookView(generics.ListCreateAPIView):
             author=author,
         ).first()
         if book:
-            raise NotAcceptable("Esse livro ja esta cadastrado")
+            raise NotAcceptable("This book is already registered")
 
         serializer.save()
 
