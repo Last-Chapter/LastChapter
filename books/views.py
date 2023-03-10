@@ -27,7 +27,7 @@ class BookDetailView(generics.RetrieveAPIView):
 class BookFollowingView(APIView):
     authentication_classes = [JWTAuthentication]
 
-    def post(self, request, book_id):
+    def post(self, request:Request, book_id):
         book = get_object_or_404(Book, id=book_id)
 
         user = request.user

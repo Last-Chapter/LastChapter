@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import User
 from django.contrib.auth.hashers import make_password
+from copies.models import Borrowing
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -52,3 +53,11 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class BorrowHistorySerializer(serializers.ModelSerializer):
+    user_borrowers = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Borrowing
+        fields = ["id", "copy", "user", "user_borrowers"]
