@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from django.shortcuts import get_object_or_404
 from datetime import date
 from rest_framework.exceptions import NotAcceptable
+from permissions.isBlockedOrNot import IsBlockedOrNot
 
 
 class CopyView(generics.ListCreateAPIView):
@@ -55,14 +56,16 @@ class CopyDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class CopyBorrowingView(APIView):
     authentication_classes = [JWTAuthentication]
+    # permission_classes = [IsBlockedOrNot]
 
     def post(self, request, copy_id):
         copy = get_object_or_404(Copy, id=copy_id)
+        user = request.user
+
+        # self.check_object_permissions(request, copy)
 
         if not copy.is_available:
             raise NotAcceptable("The copy is not available")
-
-        user = request.user
 
         serializer = CopyBorrowingSerializer(data=dict())
 
