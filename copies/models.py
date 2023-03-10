@@ -3,7 +3,6 @@ import uuid
 
 
 class Copy(models.Model):
-
     id = models.UUIDField(
         default=uuid.uuid4,
         primary_key=True,
@@ -27,6 +26,11 @@ class Copy(models.Model):
 
 
 class Borrowing(models.Model):
+    id = models.UUIDField(
+        default=uuid.uuid4,
+        primary_key=True,
+        editable=False,
+    )
     copy = models.ForeignKey(
         "copies.Copy",
         on_delete=models.CASCADE,
