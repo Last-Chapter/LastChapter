@@ -60,7 +60,7 @@ class CopyBorrowingView(APIView):
         copy = get_object_or_404(Copy, id=copy_id)
 
         if not copy.is_available:
-            raise NotAcceptable("A copia não esta disponivel")
+            raise NotAcceptable("The copy is not available")
 
         user = request.user
 
