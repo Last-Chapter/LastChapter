@@ -2,11 +2,11 @@ from .models import Copy
 from books.models import Book
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import CopySerializer
+from .serializers import CopySerializer, CopyBorrowingSerializer
 from rest_framework.views import APIView, Response, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-
+from django.shortcuts import get_object_or_404
 
 class CopyView(generics.ListCreateAPIView):
     queryset = Copy.objects.all()
@@ -49,3 +49,17 @@ class CopyDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_destroy(self, instance: Copy):
         instance.delete()
+
+
+class CopyBorrowingView(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    def post(self, request, copy_id):
+        copy = get_object_or_404(Copy, id=copy_id)
+
+        user = request.user
+        serializer = CopyBorrowingSerializer(data=dict())
+        serializer.is_valid()
+        serializer.save(copy=copy, user=user)
+
+        return Response(serializer.data, status.HTTP_201_CREATED)
