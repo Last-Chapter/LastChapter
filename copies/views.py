@@ -7,6 +7,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from django.shortcuts import get_object_or_404
 from datetime import date
+from rest_framework.exceptions import NotAcceptable
 
 
 class CopyView(generics.ListCreateAPIView):
@@ -57,9 +58,19 @@ class CopyBorrowingView(APIView):
 
     def post(self, request, copy_id):
         copy = get_object_or_404(Copy, id=copy_id)
+
+        if not copy.is_available:
+            raise NotAcceptable("A copia não esta disponivel")
+
         user = request.user
+
         serializer = CopyBorrowingSerializer(data=dict())
+
         serializer.is_valid(raise_exception=True)
+
+        copy.is_available = False
+        copy.save()
+
         serializer.save(copy=copy, user=user)
 
         return Response(serializer.data, status.HTTP_201_CREATED)
