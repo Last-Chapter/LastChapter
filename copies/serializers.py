@@ -21,7 +21,7 @@ class CopyBorrowingSerializer(serializers.ModelSerializer):
     should_return_at = serializers.DateField(
         default=lambda: date.today() + timedelta(days=15)
     )
-    returned_at = serializers.DateField()
+    returned_at = serializers.DateField(default=None)
 
     class Meta:
         model = Borrowing
@@ -33,19 +33,14 @@ class CopyBorrowingSerializer(serializers.ModelSerializer):
             "returned_at",
             "should_return_at",
         ]
-        read_only_fields = ["id", "copy", "user", "borrowed_at", "should_return_at"]
+        read_only_fields = [
+            "id",
+            "copy",
+            "user",
+            "borrowed_at",
+            "should_return_at",
+        ]
 
     def create(self, validated_data):
         borrowing = Borrowing.objects.create(**validated_data)
         return borrowing
-
-    def update(self, instance: Borrowing, validated_data: dict):
-        for key, value in validated_data.items():
-            if key.returned_at:
-                setattr(instance, key, value)
-            else:
-                raise NotAcceptable("Not acceptable")
-
-        instance.save()
-
-        return instance
