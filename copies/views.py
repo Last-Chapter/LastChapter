@@ -1,5 +1,6 @@
 from .models import Copy, Borrowing
 from books.models import Book
+from users.models import User
 from rest_framework import generics
 from .serializers import CopySerializer, CopyBorrowingSerializer
 from rest_framework.views import APIView, Response, status
@@ -84,6 +85,14 @@ class CopyBorrowingView(APIView):
         today = date.today()
 
         borrowing.returned_at = today
+
+        user = get_object_or_404(User, pk=request.user.id)
+
+        is_late = today > borrowing.should_return_at
+
+        if is_late:
+            user.is_blocked = True
+            user.save()
 
         copy = Copy.objects.get(id=copy_id)
 
