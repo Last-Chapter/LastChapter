@@ -78,12 +78,15 @@ class CopyBorrowingView(APIView):
         serializer.save(copy=copy, user=user)
 
         return Response(serializer.data, status.HTTP_201_CREATED)
-    
+
     def patch(self, request, copy_id):
         borrowing = get_object_or_404(Borrowing, copy=copy_id)
 
         today = date.today()
-
+        today = ""  # precisa coloca a data em atraso chubado
+        """precisa coloca a logica de envia o email 
+           para o cliente quando tiver a copia disponivel
+        """
         borrowing.returned_at = today
 
         user = get_object_or_404(User, pk=request.user.id)
