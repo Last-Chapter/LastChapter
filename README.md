@@ -27,12 +27,12 @@ Run the migrations:
 ```bash
 python manage.py migrate
 ```
+## Documentation
+- [Last Chapter Documentation](http://127.0.0.1:8000/api/docs/)
 
 ## Devs who were part of this project:
 
-
-<a href="https://www.linkedin.com/in/angelica-assini/" target="_blank" markdown: kramdown>Angelica Assini</a>
-
+- [Angelica Assini](https://www.linkedin.com/in/angelica-assini/)
 - [Dreic Leal](https://www.linkedin.com/in/dreicleal/)
 - [Henrique Jesus](https://www.linkedin.com/in/henrique-jesus128/)
 - [Yasmin Batista](https://www.linkedin.com/in/tsukedev/)
