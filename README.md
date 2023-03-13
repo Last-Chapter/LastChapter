@@ -8,11 +8,23 @@ This application aims to manage a library in which students can pick up books wi
 
 <h2>Installation:</h2>
 
-1- Install and activate venv
+1- Install and activate venv:
+```bash
+  pip install venv
+```
+```bash
+source venv/Scripts/activate
+```
 
-2- Run pip "install -r requirements.txt" to install all dependencies
+2- Install all dependencies:
+```bash
+  pip install -r requirements.txt
+```
+3- Run the migrations:
+```bash
+python manage.py migrate
 
-3- Run the migrations with "python manage.py migrate"
+```
 
 <br></br>
 
