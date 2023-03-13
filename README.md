@@ -6,16 +6,18 @@ This application aims to manage a library in which students can pick up books wi
 
 ![Library](DER_last_chapter.png)
 
-<h2>Installation:</h2>
+<h2>Installation</h2>
 
-1- Install and activate venv:
+<h4>Install and activate venv</h3>
+
 ```bash
   pip install venv
 ```
+<h4>Activate on</h4>
 
-- Activate on linux: `source venv/bin/activate`, 
-- Windows: `.\venv\Scripts\activate`,
-- Gitbash: `source venv/Scripts/activate`.
+- Linux: `source venv/bin/activate`
+- Windows: `.\venv\Scripts\activate`
+- Gitbash: `source venv/Scripts/activate`
 
 2- Install all dependencies:
 ```bash
