@@ -12,6 +12,8 @@ This application aims to manage a library in which students can pick up books wi
 ```bash
   pip install venv
 ```
+
+Activate on linux: `source venv/bin/activate`, on windows: `.\venv\Scripts\activate`, and with gitbash: `source venv/Scripts/activate`.
 ```bash
 source venv/Scripts/activate
 ```
