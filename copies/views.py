@@ -61,16 +61,16 @@ class CopyBorrowingView(APIView):
 
     def post(self, request, copy_id):
         copy = get_object_or_404(Copy, id=copy_id)
-        user:User = request.user
+        user: User = request.user
 
         today = date.today() + timedelta(days=15)
-        
+
         if user.blocked_until and today > user.blocked_until.date():
             user.blocked_until = None
             user.is_blocked = False
             user.save()
 
-        if user.is_blocked :
+        if user.is_blocked:
 
             raise NotAcceptable("Account has been blocked")
 
