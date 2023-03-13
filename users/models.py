@@ -9,6 +9,7 @@ class User(AbstractUser):
         primary_key=True,
         editable=False,
     )
+    blocked_until = models.DateTimeField(null=True, blank=True)
     is_blocked = models.BooleanField(null=True, default=False)
     email = models.EmailField(max_length=127, unique=True)
     first_name = models.CharField(max_length=127)

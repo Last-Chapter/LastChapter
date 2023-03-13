@@ -7,7 +7,7 @@ from rest_framework.views import APIView, Response, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from django.shortcuts import get_object_or_404
-from datetime import date
+from datetime import date, timedelta
 from rest_framework.exceptions import NotAcceptable
 from permissions.isBlockedOrNot import IsBlockedOrNot
 
@@ -60,9 +60,17 @@ class CopyBorrowingView(APIView):
 
     def post(self, request, copy_id):
         copy = get_object_or_404(Copy, id=copy_id)
-        user = request.user
+        user:User = request.user
 
-        if user.is_blocked:
+        today = date.today() + timedelta(days=15)
+        
+        if user.blocked_until and today > user.blocked_until.date():
+            user.blocked_until = None
+            user.is_blocked = False
+            user.save()
+
+        if user.is_blocked :
+
             raise NotAcceptable("Account has been blocked")
 
         if not copy.is_available:
@@ -93,6 +101,8 @@ class CopyBorrowingView(APIView):
         is_late = today > borrowing.should_return_at
 
         if is_late:
+            blocked_until = today + timedelta(days=10)
+            user.blocked_until = blocked_until
             user.is_blocked = True
             user.save()
 

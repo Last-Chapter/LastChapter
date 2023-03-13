@@ -26,11 +26,14 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "is_active",
             "is_blocked",
+            "blocked_until",
             "address_id",
         ]
         extra_kwargs = {
             "password": {"write_only": True},
             "id": {"read_only": True},
+            "is_blocked": {"read_only": True},
+            "blocked_until": {"read_only": True},
             "is_staff": {"read_only": True},
         }
 
