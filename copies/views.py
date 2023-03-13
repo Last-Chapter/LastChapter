@@ -83,7 +83,6 @@ class CopyBorrowingView(APIView):
         borrowing = get_object_or_404(Borrowing, copy=copy_id)
 
         today = date.today()
-        today = ""  # precisa coloca a data em atraso chubado
         """precisa coloca a logica de envia o email 
            para o cliente quando tiver a copia disponivel
         """
