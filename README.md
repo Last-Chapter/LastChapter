@@ -28,11 +28,13 @@ Run the migrations:
 python manage.py migrate
 ```
 ## Documentation
-- [Last Chapter Documentation](http://127.0.0.1:8000/api/docs/){:target="_blank"}
+- [Last Chapter Documentation](http://127.0.0.1:8000/api/docs/)
 
 ## Devs who were part of this project:
 
-- [Angelica Assini](https://www.linkedin.com/in/angelica-assini/)
+<a href="https://www.linkedin.com/in/angelica-assini/" target="_blank">Angelica</a>
+
+- [Angelica Assini](https://www.linkedin.com/in/angelica-assini/){:target="_blank" rel="noopener"}
 - [Dreic Leal](https://www.linkedin.com/in/dreicleal/)
 - [Henrique Jesus](https://www.linkedin.com/in/henrique-jesus128/)
 - [Yasmin Batista](https://www.linkedin.com/in/tsukedev/)
