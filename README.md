@@ -15,7 +15,6 @@ This application aims to manage a library in which students can pick up books wi
 ```bash
 source venv/Scripts/activate
 ```
-
 2- Install all dependencies:
 ```bash
   pip install -r requirements.txt
@@ -23,18 +22,11 @@ source venv/Scripts/activate
 3- Run the migrations:
 ```bash
 python manage.py migrate
-
 ```
 
-<br></br>
+## Devs who were part of this project:
 
-Devs who were part of this project:
-
-[Angelica Assini](https://www.linkedin.com/in/angelica-assini/)
-
-[Dreic Leal](https://www.linkedin.com/in/dreicleal/)
-
-[Henrique Jesus](https://www.linkedin.com/in/henrique-jesus128/)
-
-[Yasmin Batista](https://www.linkedin.com/in/tsukedev/)
-
+- [Angelica Assini](https://www.linkedin.com/in/angelica-assini/)
+- [Dreic Leal](https://www.linkedin.com/in/dreicleal/)
+- [Henrique Jesus](https://www.linkedin.com/in/henrique-jesus128/)
+- [Yasmin Batista](https://www.linkedin.com/in/tsukedev/)
