@@ -13,10 +13,10 @@ This application aims to manage a library in which students can pick up books wi
   pip install venv
 ```
 
-Activate on linux: `source venv/bin/activate`, on windows: `.\venv\Scripts\activate`, and with gitbash: `source venv/Scripts/activate`.
-```bash
-source venv/Scripts/activate
-```
+- Activate on linux: `source venv/bin/activate`, 
+- Windows: `.\venv\Scripts\activate`,
+- Gitbash: `source venv/Scripts/activate`.
+
 2- Install all dependencies:
 ```bash
   pip install -r requirements.txt
