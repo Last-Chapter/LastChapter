@@ -31,7 +31,7 @@ python manage.py migrate
 ## Devs who were part of this project:
 
 
-<a href="https://www.linkedin.com/in/angelica-assini/" target="_blank">Angelica Assini</a>
+<a href="https://www.linkedin.com/in/angelica-assini/" target="_blank" markdown: kramdown>Angelica Assini</a>
 
 - [Dreic Leal](https://www.linkedin.com/in/dreicleal/)
 - [Henrique Jesus](https://www.linkedin.com/in/henrique-jesus128/)
