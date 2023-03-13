@@ -1,6 +1,6 @@
 <h1>Welcome to <strong>Last Chapter!<strong></h1>
 
-This application aims to manage a library in which students can pick up books with a return date and, if they do not return, they must be blocked.
+This application aims to manage a library in which students can pick up books with a return date and, if they don't return, they will be blocked.
 
 <h3>Diagram:</h3>
 
