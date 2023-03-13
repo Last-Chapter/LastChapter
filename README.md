@@ -8,8 +8,10 @@ This application aims to manage a library in which students can pick up books wi
 
 <h2>Installation:</h2>
 
-1- Install and activate venv 
+1- Install and activate venv
+
 2- Run pip "install -r requirements.txt" to install all dependencies
+
 3- Run the migrations with "python manage.py migrate"
 
 <br></br>
@@ -17,7 +19,10 @@ This application aims to manage a library in which students can pick up books wi
 Devs who were part of this project:
 
 [Angelica Assini](https://www.linkedin.com/in/angelica-assini/)
+
 [Dreic Leal](https://www.linkedin.com/in/dreicleal/)
+
 [Henrique Jesus](https://www.linkedin.com/in/henrique-jesus128/)
+
 [Yasmin Batista](https://www.linkedin.com/in/tsukedev/)
 
