@@ -3,15 +3,15 @@ from rest_framework.views import APIView, Response, Request, status
 from .models import Book
 from .serializers import BookSerializer, BookFollowingSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from permissions.isAccountOwnerOrAdmin import IsAccountOwnerOrAdmin
+from permissions.isAdminOrReadOnly import IsAdminOrReadOnly
+
 from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.exceptions import NotAcceptable
 
 
 class BookView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly]
 
     queryset = Book.objects.all()
     serializer_class = BookSerializer
@@ -31,8 +31,6 @@ class BookView(generics.ListCreateAPIView):
 
 
 class BookDetailView(generics.RetrieveAPIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAccountOwnerOrAdmin]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
