@@ -41,5 +41,12 @@ class CopyBorrowingSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
+        should_return_at = validated_data.get('should_return_at')
+
+        if should_return_at.weekday() > 4 :
+            days_to_add = 7 - should_return_at.weekday()
+            should_return_at += timedelta(days=days_to_add)
+        validated_data['should_return_at'] = should_return_at
+
         borrowing = Borrowing.objects.create(**validated_data)
         return borrowing
