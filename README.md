@@ -28,7 +28,7 @@ Run the migrations:
 python manage.py migrate
 ```
 ## Documentation
-- [Last Chapter Documentation](http://127.0.0.1:8000/api/docs/)
+- [Last Chapter Documentation](https://last-chapter-w-service.onrender.com/api/docs/)
 
 ## Devs who were part of this project:
 
